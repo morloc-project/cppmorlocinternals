@@ -45,3 +45,17 @@ TEST_CASE("string handling") {
     CHECK(serialize("as\\\"df", a) == "\"as\\\"df\"");
     CHECK(deserialize("\"asdf\"", a) == "asdf");
 }
+
+TEST_CASE("lists") {
+    std::vector<int> a = {};
+    std::vector<int> xs = {1,2,3};
+    CHECK(serialize(xs, a) == "[1,2,3]");
+    CHECK(deserialize("[1,2,3]", a) == xs);
+}
+
+TEST_CASE("tuples") {
+    std::tuple<int,double> a = std::make_tuple(0,0.0);
+    std::tuple<int,double> xs = std::make_tuple(1,4.2);
+    CHECK(serialize(xs, a) == "[1,4.2]");
+    CHECK(deserialize("[1,4.2]", a) == xs);
+}
