@@ -280,9 +280,14 @@ bool deserialize(const std::string json, size_t &i, std::string &x){
 
 template <class A>
 bool integer_deserialize(const std::string json, size_t &i, A &x){
+    char sign = '+';
+    if(json[i] == '-'){
+        sign = '-';
+        i++;
+    }
     std::string x_str = digit_str(json, i);
     if(x_str.size() > 0){
-        std::stringstream sstream(x_str);
+        std::stringstream sstream(sign + x_str);
         sstream >> x;
         return true;
     }
