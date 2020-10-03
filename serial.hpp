@@ -362,7 +362,7 @@ bool _deserialize_tuple(const std::string json, size_t &i, std::tuple<A, Rest...
 template <class... Rest>
 bool deserialize(const std::string json, size_t &i, std::tuple<Rest...> &x){
     try {
-        if(! match(json, "(", i)){
+        if(! match(json, "[", i)){
             throw 1;
         }
         whitespace(json, i);
@@ -370,7 +370,7 @@ bool deserialize(const std::string json, size_t &i, std::tuple<Rest...> &x){
             throw 1;
         }
         whitespace(json, i);
-        if(! match(json, ")", i)){
+        if(! match(json, "]", i)){
             throw 1;
         }
     } catch (int e) {
