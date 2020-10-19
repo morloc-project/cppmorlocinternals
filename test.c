@@ -83,3 +83,14 @@ TEST_CASE("lists of tuples") {
     CHECK(serialize(zzs, ds) == "[[1,\"qwer\"],[2,\"asdf\"],[3,\"zxcv\"]]");
     CHECK(deserialize("[[1,\"qwer\"],[2,\"asdf\"],[3,\"zxcv\"]]", ds) == zzs);
 }
+
+TEST_CASE("tuple of lists") {
+
+    std::vector<int> xs = {1,2};
+    std::vector<double> ys = {1.2,2.48};
+
+    std::tuple<std::vector<int>,std::vector<double>> zs = std::make_tuple(xs,ys);
+
+    CHECK(serialize(zs, zs) == "[[1,2],[1.2,2.48]]");
+    CHECK(deserialize("[[1,2],[1.2,2.48]]", zs) == zs);
+}
