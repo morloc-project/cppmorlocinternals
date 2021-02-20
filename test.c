@@ -39,6 +39,22 @@ TEST_CASE("double handling") {
     CHECK(deserialize("1.28", a) == 1.28);
 }
 
+TEST_CASE("float handling") {
+    float b = 0;
+    CHECK(serialize(-1.28f, b) == "-1.28");
+    CHECK(serialize(-0.12f, b) == "-0.12");
+    CHECK(serialize(0.0f, b) == "0");
+    CHECK(serialize(0.12f, b) == "0.12");
+    CHECK(serialize(1.28f, b) == "1.28");
+    CHECK(deserialize("-1.28", b) == -1.28f);
+    CHECK(deserialize("-0.12", b) == -0.12f);
+    CHECK(deserialize("0", b) == 0.0f);
+    CHECK(deserialize("0.0", b) == 0.0f);
+    CHECK(deserialize("0.12", b) == 0.12f);
+    CHECK(deserialize("2", b) == 2.0f);
+    CHECK(deserialize("1.28", b) == 1.28f);
+}
+
 TEST_CASE("string handling") {
     std::string a = "";
     CHECK(serialize("asdf", a) == "\"asdf\"");
